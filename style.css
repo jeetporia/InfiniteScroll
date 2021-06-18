@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
+html {
+    box-sizing:border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Permanent Marker', cursive;
+    background: whitesmoke;
+}
+
+.header {
+    font-size: 40px;
+    text-align: center;
+    letter-spacing: 5px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+/*  to make position in the center of the page no matter what size of page and what size of image 
+    we are doing this with fixed position because we want to add background color 
+    we can also use flex box to align items but we can not add background in that case
+
+    .loader class will also work as overlay by giving top bottom right and left 0 will strech element to the all corner
+*/
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, black, transparent);
+}
+/*  to make position in the center of the page no matter what size of page and what size of image */
+.loader img {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.image-container {
+    /* top - bottom and left - right */
+    margin: 10px 30%;
+}
+
+.image-container img {
+    width: 100%;
+    margin-top:5px;
+}
+
+/* we will use media query to achive responsiveness in the page 
+    for large screen size of phone use max-width 600px
+*/
+
+@media screen and (max-width:600px) {
+    h1 {
+        font-size: 20px;
+    }
+
+    .image-container {
+        margin: 10px;
+    }
+}
