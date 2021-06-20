@@ -4,9 +4,15 @@ const loader = document.getElementById('loader');
 
 let photoArrays = [];
 
-const count = 10;
+const count = 30;
 const apiKey = 'kTlxwy2VORmlusLbb-tJUfZUsfV-qK3nlhOoU32_GCU';
 const api = `https://api.unsplash.com/photos/random?client_id=${apiKey}&count=${count}`;
+
+// we are only call api when ready == true, it will true when acutal return images and loaded images are equal.
+let ready = false;
+let imageLoaded = 0;
+let totalPhotos = 0;
+
 
 // we are creating new function to add attributes dynamically without repeating the same code.
 function setAttributes (element, attributes) {
@@ -18,9 +24,20 @@ function setAttributes (element, attributes) {
 
 function loadImage() {
     console.log('Loaded')
+    imageLoaded++;
+    console.log('total Image ', imageLoaded);
+
+    if(imageLoaded === totalPhotos) {
+        ready = true;
+        console.log('Ready ', ready);
+    }
+
 }
 
 function displayPhotos () {
+    imageLoaded = 0;
+    totalPhotos = photoArrays.length;
+    console.log('actual total ', totalPhotos);
     photoArrays.forEach((photo) => {
         // this will create the a element dynamically
         const item = document.createElement('a');
@@ -71,7 +88,8 @@ window.addEventListener('scroll', ()=> {
     // window.innerHeight = height of the browser window
     // window.scrollY = how much we have scroll from the top of the page.
     // document.body.offset = actual height of the html includes all the items
-     if(window.innerHeight +  window.scrollY >= document.body.offsetHeight - 1000) {
+     if(window.innerHeight +  window.scrollY >= document.body.offsetHeight - 1000 && ready) {
+         ready = false;
         getPhotos();
      }
 })
