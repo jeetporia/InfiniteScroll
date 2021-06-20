@@ -16,6 +16,10 @@ function setAttributes (element, attributes) {
     }
 }
 
+function loadImage() {
+    console.log('Loaded')
+}
+
 function displayPhotos () {
     photoArrays.forEach((photo) => {
         // this will create the a element dynamically
@@ -32,6 +36,11 @@ function displayPhotos () {
         // imag.setAttribute('src',photo.urls.regular);
         // imag.setAttribute('alt', photo.alt_description);
         // imag.setAttribute('title', photo.alt_description);
+
+        // we will call the function when images are loaded
+        imag.addEventListener('load', ()=> {
+            loadImage();
+        })
 
         setAttributes(imag,  {
             src : photo.urls.regular,
@@ -57,5 +66,14 @@ async function getPhotos() {
         console.log(error);
     }
 }
+
+window.addEventListener('scroll', ()=> {
+    // window.innerHeight = height of the browser window
+    // window.scrollY = how much we have scroll from the top of the page.
+    // document.body.offset = actual height of the html includes all the items
+     if(window.innerHeight +  window.scrollY >= document.body.offsetHeight - 1000) {
+        getPhotos();
+     }
+})
 
 getPhotos();
