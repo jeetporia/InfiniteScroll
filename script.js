@@ -23,13 +23,12 @@ function setAttributes (element, attributes) {
 }
 
 function loadImage() {
-    console.log('Loaded')
     imageLoaded++;
-    console.log('total Image ', imageLoaded);
 
     if(imageLoaded === totalPhotos) {
         ready = true;
-        console.log('Ready ', ready);
+        // loader will be false when images are not loaded
+        // loader.hidden = true;
     }
 
 }
@@ -37,7 +36,6 @@ function loadImage() {
 function displayPhotos () {
     imageLoaded = 0;
     totalPhotos = photoArrays.length;
-    console.log('actual total ', totalPhotos);
     photoArrays.forEach((photo) => {
         // this will create the a element dynamically
         const item = document.createElement('a');
